@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="Iconos">
+    <file>Balcón.png</file>
+    <file>Brócoli.png</file>
+    <file>Compás.png</file>
+    <file>Lápiz.png</file>
+  </qresource>
+  <qresource prefix="Imagenes">
+    <file>Reina_tréboles.jpeg</file>
+  </qresource>
+</RCC>
