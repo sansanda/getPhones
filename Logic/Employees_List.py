@@ -12,6 +12,8 @@ from Logic.Filter.IFilter import IFilter
 from Data.Excel_Utilities.ExcelUtils_OpenpyxlBased import loadEmployeesFromExcel
 from Data.Excel_Utilities.ExcelUtils_OpenpyxlBased import insertRowInExcel
 from Data.Excel_Utilities.ExcelUtils_OpenpyxlBased import deleteRowInExcel
+from Data.Excel_Utilities.ExcelUtils_OpenpyxlBased import deleteAllRows
+
 
 from Logic.EmployeeData import EmployeeData
 
@@ -82,16 +84,29 @@ class Employees_List(list):
         return filteredEmployees, filteredEmployees_Count
 
     def updateEmployeesDataSource(self, employeesDataFilepath, employeesDataFilename, updatedEmployeeData, deleteEmployee=False):
+        if self.existEmployee(updatedEmployeeData['nombre']):
+            deleteRowInExcel(updatedEmployeeData, employeesDataFilepath, employeesDataFilename)
         if deleteEmployee == False:
             insertRowInExcel(updatedEmployeeData, employeesDataFilepath, employeesDataFilename)
-        elif deleteEmployee == True:
-            deleteRowInExcel(updatedEmployeeData, employeesDataFilepath, employeesDataFilename)
+
+    def emptyDataSource(self, employeesDataFilepath, employeesDataFilename):
+        deleteAllRows(employeesDataFilepath, employeesDataFilename)
+
+    def insertEmployeeInDataSource(self, employeesDataFilepath, employeesDataFilename, employeeData):
+        insertRowInExcel(employeeData, employeesDataFilepath, employeesDataFilename)
 
 def main():
     el = Employees_List()
-    ed = EmployeeData('david','de','2g1','desplñ,l','661290548','dsabcsiuh@gmail.com','mifoto')
-    el.loadEmployeesDataFromSource('E:\\repos\\getPhones\\persistence\\data\\', 'EmployeesData.xlsx', None)
+    ed = EmployeeData('Pepe2','de','2g1','desplñ,l','661290548','dsabcsiuh@gmail.com','mifoto')
+    ed2 = EmployeeData('Pepe', 'dede', '2g1', 'desplñ,l', '661290548', 'dsabcsiuh@gmail.com', 'mifoto')
+    el.loadEmployeesDataFromSource('E:\\software development\\getPhones\\persistence\\data\\', 'EmployeesData.xlsx', None)
     print(el)
+    el.newEmployee(ed)
+    print(el)
+    #el.updateEmployeesDataSource('E:\\software development\\getPhones\\persistence\\data\\', 'EmployeesData.xlsx',ed2)
+    print(el)
+
+
 
 if __name__ == "__main__":
     main()

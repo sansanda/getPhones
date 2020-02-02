@@ -55,6 +55,16 @@ class EmployeeData(dict):
                             employeeDataAsDict['mail'],
                             employeeDataAsDict['foto'])
 
+    @classmethod
+    def createFromTuple(cls, employeeDataAsTuple):
+
+        return EmployeeData(employeeDataAsTuple[0],
+                            employeeDataAsTuple[1],
+                            employeeDataAsTuple[2],
+                            employeeDataAsTuple[3],
+                            employeeDataAsTuple[4],
+                            employeeDataAsTuple[5],
+                            employeeDataAsTuple[6])
 
 def main():
     ed = EmployeeData('david','de','2g1','desplñ,l','661290548','dsabcsiuh@gmail.com','mifoto')

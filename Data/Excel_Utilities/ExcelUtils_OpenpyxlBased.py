@@ -17,16 +17,19 @@ def loadEmployeesFromExcel(employeesList, employeesFilePath, employeesFileName):
 
         employeesList.newEmployee(EmployeeData.createFromDict(newEmployeeData))
 
+    workbook.close()
+
 def insertRowInExcel(employeeData, employeesFilePath, employeesFileName):  # employeeData is a dictionary
 
     workbook = openpyxl.load_workbook(os.path.join(employeesFilePath, employeesFileName))
     worksheet = workbook.get_sheet_by_name('EmployeesData')
 
-    jobIdToFind_RowIndex = _getRowIndexByEmployeeName(worksheet, employeeData['jobId'])  # 0 is the column index of the nombre
+    jobIdToFind_RowIndex = _getRowIndexByEmployeeName(worksheet, employeeData['nombre'])  # 0 is the column index of the nombre
 
     #worksheet.max_row because we will insert at the end of the sheet
     _insertRowAtSheet(worksheet, worksheet.max_row + 1, employeeData) #because excel is 1 based and row is occupied by the headers
     workbook.save(os.path.join(employeesFilePath, employeesFileName))
+    workbook.close()
 
 def deleteRowInExcel(employeeData, employeesFilePath, employeesFileName):  # employeeData is a dictionary
 
@@ -35,6 +38,17 @@ def deleteRowInExcel(employeeData, employeesFilePath, employeesFileName):  # emp
     jobIdToFind_RowIndex = _getRowIndexByEmployeeName(worksheet, employeeData['nombre'])  # 0 is the column index of the nombre
     _deleteRowAtSheet(worksheet, jobIdToFind_RowIndex)
     workbook.save(os.path.join(employeesFilePath, employeesFileName))
+    workbook.close()
+
+def deleteAllRows(employeesFilePath, employeesFileName):
+    workbook = openpyxl.load_workbook(os.path.join(employeesFilePath, employeesFileName))
+    worksheet = workbook.get_sheet_by_name('EmployeesData')
+
+    i = 2
+    while i <= worksheet.max_row:
+        worksheet.delete_rows(i, 1)
+    workbook.save(os.path.join(employeesFilePath, employeesFileName))
+    workbook.close()
 
 # Auxiliar functions
 

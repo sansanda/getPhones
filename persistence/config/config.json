@@ -1,1 +1,1 @@
-{"textFilterOptions": {"caseSensitive": false, "and": true, "wholeWord": false}, "laserJobsFileLocation": {"laserJobsFilePath": "E:\\repos\\LaserJobs-Logbook\\persistence\\data/", "laserJobsFileName": "defaultLaserJobsFile.xlsx"}}
+{"textFilterOptions": {"caseSensitive": false, "and": true, "wholeWord": false}, "employeesListFileLocation": {"employeesListFilePath": "E:\\repos\\LaserJobs-Logbook\\persistence\\data/", "employeesListFileName": "defaultEmployeesData.xlsx"}}
