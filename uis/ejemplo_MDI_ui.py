@@ -8,7 +8,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import Ejercicios.recursos.recursos_1_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

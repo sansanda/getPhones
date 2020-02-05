@@ -88,8 +88,11 @@ def _getRowIndexByEmployeeName(worksheet, employeeNameToFind):
 def _insertRowAtSheet(worksheet, rowToInsert, employeeData):
     columnNames = readRowValues(worksheet, 1, 1, None)
     worksheet.insert_rows(idx=rowToInsert)
+
     for columnName_Index, columnName in enumerate(columnNames):
-        worksheet.cell(row=rowToInsert, column=columnName_Index+1).value = employeeData[columnName]
+        cell = worksheet.cell(row=rowToInsert, column=columnName_Index + 1)
+        cell.value = employeeData[columnName]
+
 
 def _deleteRowAtSheet(worksheet, rowToDelete_Index):
     worksheet.delete_rows(rowToDelete_Index, amount=1)

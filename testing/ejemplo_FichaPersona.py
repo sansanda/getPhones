@@ -2,7 +2,6 @@ import sys
 
 sys.path.append(r"E:\repos\GUIS-con-Python-3\Ejercicios")
 from uis.FichaPersona_ui import *
-from recursos.recursos_1_rc import *
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import *
 

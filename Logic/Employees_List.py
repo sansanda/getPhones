@@ -19,8 +19,10 @@ from Logic.EmployeeData import EmployeeData
 
 class Employees_List(list):
 
-    def __init__(self):
+    def __init__(self, employeesDataFilePath, employeesDataFileName):
         list.__init__(self)
+        self.employeesDataFilePath = employeesDataFilePath
+        self.employeesDataFileName = employeesDataFileName
 
     def filterEmployees(self, IFilter):
         if not IFilter: return self
@@ -75,25 +77,25 @@ class Employees_List(list):
                 break
         return employeeIndex
 
-    def loadEmployeesDataFromSource(self, employeesDataFilepath, employeesDataFilename, filter):
+    def loadEmployeesDataFromSource(self, filter):
         self.deleteAllEmployees()
-        loadEmployeesFromExcel(self, employeesDataFilepath, employeesDataFilename)
+        loadEmployeesFromExcel(self, self.employeesDataFilePath, self.employeesDataFileName)
         filteredEmployees = (self.filterEmployees(filter))
         filteredEmployees.sort(key=lambda k: k['nombre'])
         filteredEmployees_Count = len(filteredEmployees)
         return filteredEmployees, filteredEmployees_Count
 
-    def updateEmployeesDataSource(self, employeesDataFilepath, employeesDataFilename, updatedEmployeeData, deleteEmployee=False):
+    def updateEmployeesDataSource(self, updatedEmployeeData, deleteEmployee=False):
         if self.existEmployee(updatedEmployeeData['nombre']):
-            deleteRowInExcel(updatedEmployeeData, employeesDataFilepath, employeesDataFilename)
+            deleteRowInExcel(updatedEmployeeData, self.employeesDataFilePath, self.employeesDataFileName)
         if deleteEmployee == False:
-            insertRowInExcel(updatedEmployeeData, employeesDataFilepath, employeesDataFilename)
+            insertRowInExcel(updatedEmployeeData, self.employeesDataFilePath, self.employeesDataFileName)
 
-    def emptyDataSource(self, employeesDataFilepath, employeesDataFilename):
-        deleteAllRows(employeesDataFilepath, employeesDataFilename)
+    def emptyDataSource(self):
+        deleteAllRows(self.employeesDataFilePath, self.employeesDataFileName)
 
-    def insertEmployeeInDataSource(self, employeesDataFilepath, employeesDataFilename, employeeData):
-        insertRowInExcel(employeeData, employeesDataFilepath, employeesDataFilename)
+    def insertEmployeeInDataSource(self,  employeeData):
+        insertRowInExcel(employeeData, self.employeesDataFilePath, self.employeesDataFileName)
 
 def main():
     el = Employees_List()
