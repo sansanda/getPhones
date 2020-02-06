@@ -3,6 +3,7 @@ from Logic.EmployeeData import EmployeeData
 
 class TextFilter(IFilter):
 
+    #textList is a list of strings
     def __init__(self, textList, caseSensitiveOption=True, andOption=True, wholeWordOption=True):
         self.textList = textList
         self.caseSensitiveOption = caseSensitiveOption
