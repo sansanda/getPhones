@@ -6,7 +6,7 @@ from Logic.Employees_List import Employees_List
 from Logic.Filter.TextFilter import TextFilter
 from uis.Mostrador_FichasPersona import Mostrador_FichasPersona
 
-EMPLOYEES_FILE_PATH = '..\\persistence\\data\\'
+EMPLOYEES_FILE_PATH = '.\\persistence\\data\\'
 EMPLOYEES_IMAGES_FOLDER = 'employees_images\\'
 EMPLOYEES_FILE_NAME = 'EmployeesData.xlsx'
 

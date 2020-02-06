@@ -2,12 +2,12 @@
 from Data.miner.employeesDataMiner import EmployeesDataMiner
 import os
 import time
-from tkinter import messagebox
+import sys
 
 URL = "https://intranet.imb-cnm.csic.es/intranet/"
 USER = 'dsanchez'
 PASSWORD = 'mtx.23'
-EMPLOYEES_FILE_PATH = '..\\persistence\\data\\'
+EMPLOYEES_FILE_PATH = '.\\persistence\\data\\'
 EMPLOYEES_IMAGES_FOLDER = 'employees_images\\'
 EMPLOYEES_FILE_NAME = 'EmployeesData.xlsx'
 
@@ -15,10 +15,11 @@ thresholdTime = 360 #360 horas = 15 dias x 24 horas/dia
 
 def main():
 
+    kwargs = dict(x.split('=', 1) for x in sys.argv[1:])
     modificationTime = os.path.getmtime(EMPLOYEES_FILE_PATH+EMPLOYEES_FILE_NAME)
-    #print(modificationTime)
     actualTime = time.time()
-    #modificationTime = 1
+    if kwargs['force']=='True': modificationTime = 1
+
     #print(actualTime)
     file_hoursOld = (actualTime-modificationTime)/3600
     #print(file_hoursOld)
@@ -30,3 +31,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
